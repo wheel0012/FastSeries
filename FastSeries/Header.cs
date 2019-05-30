@@ -9,17 +9,18 @@ namespace FastSeries
 {
     static class Header
     {
-        public static void WriteHeader(BinaryWriter writer, string[] tableDescriptions)
+        public static void WriteHeader(StreamWriter writer, string[] tableDescriptions)
         {
             writer.Write((UInt16)tableDescriptions.Length);
             foreach (var item in tableDescriptions) writer.Write(item);
         }
 
-        public static List<string> ReadHeader(BinaryReader reader)
+        public static List<string> ReadHeader(StreamReader reader)
         {
-            UInt16 n = reader.ReadUInt16();
+            UInt16 n;
+            UInt16.TryParse(reader.ReadLine(), out n);
             List<string> result = new List<string>(n);
-            for (int i = 0; i < n; i++) result.Add(reader.ReadString());
+            for (int i = 0; i < n; i++) result.Add(reader.read());
             return result;
         }
     }

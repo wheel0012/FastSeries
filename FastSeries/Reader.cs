@@ -12,13 +12,13 @@ namespace FastSeries
     {
         public Stream Stream { get; private set; }
         public ReadOnlyCollection<string> TableDescriptions { get; private set; }
-        BinaryReader reader;
+        StreamReader reader;
         long zeroPosition;
 
         public Reader(Stream stream)
         {
             Stream = stream;
-            reader = new BinaryReader(Stream);
+            reader = new StreamReader(Stream);
             var tableDescreiptions = Header.ReadHeader(reader);
             zeroPosition = Stream.Position;
             TableDescriptions = new ReadOnlyCollection<string>(tableDescreiptions);

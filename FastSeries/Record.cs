@@ -14,19 +14,25 @@ namespace FastSeries
 
         
         public Data Values;
-        public static Record FromStream(BinaryReader reader)
+        public static Record FromStream(StreamReader reader)
         {
-            var tableID = reader.ReadUInt16();
-            var ticks = reader.ReadInt64();
+            var tableID = (ushort)0;
+            ushort.TryParse(reader.ReadLine(), out tableID);
+            var ticks = (long)0;
+            long.TryParse(reader.ReadLine(),out ticks);
             var time = new TimeSpan(ticks);
             Data values = new Data { };
-            values.ID = reader.ReadInt32();
-            values.CTime = reader.ReadString();
-            values.Name = reader.ReadString();
-            values.TYPE = reader.ReadChar();
-            values.VALUE_STR = reader.ReadString();
-            values.VALUE_NUM = reader.ReadDouble();
-            values.VALUE_RAW = reader.ReadString();
+            var ID = 0;
+            int.TryParse(reader.ReadLine(), out ID);
+            values.ID = ID;
+            values.CTime = reader.ReadLine();
+            values.Name = reader.ReadLine();
+            values.TYPE = reader.ReadLine().ToCharArray()[0];
+            values.VALUE_STR = reader.ReadLine();
+            var value_Num = 0.0;
+            double.TryParse(reader.ReadLine(), out value_Num);
+            values.VALUE_NUM = value_Num; 
+            values.VALUE_RAW = reader.ReadLine();
            
             return new Record { Time = time, TableID = tableID, Values = values};
         }
