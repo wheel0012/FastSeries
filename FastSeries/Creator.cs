@@ -24,6 +24,7 @@ namespace FastSeries
             {
                 if (file.Position != 0) Create(file);
                 else Create(file, tableDescriptions);
+
             }
                 
            // using (var file2 = File.Open(fileName, FileMode.Open, FileAccess.Read))
