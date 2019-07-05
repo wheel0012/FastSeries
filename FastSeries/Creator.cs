@@ -17,7 +17,7 @@ namespace FastSeries
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="tableDescriptions"></param>
-        public static void Create(Stream stream, params string[] tableDescriptions)
+public static void Create(Stream stream, params string[] tableDescriptions)
         {
             var writer = new BinaryWriter(stream);
             Header.WriteHeader(writer, tableDescriptions);

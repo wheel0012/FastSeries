@@ -59,6 +59,7 @@ namespace FastSeries.Sample
             create();
             write();
             read();
+
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
