@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 namespace FastSeries
 {
-    public class Reader
+    public class Reader : Searcher
     {
         public Stream Stream { get; private set; }
         public ReadOnlyCollection<string> TableDescriptions { get; private set; }
