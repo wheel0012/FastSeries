@@ -32,21 +32,16 @@ Writing to a database is as simple as creating an instance of `Writer` and calli
 Console.WriteLine(">>> Writing data.");
 
 var writer = new FastSeries.Writer("test.db");
-var start = DateTime.Now;
 
-for (int i = 0; i < 7; ++i)
-    writer.WriteItem(0, DateTime.Now - start, i);
-
-for (int i = 0; i < 9; ++i)
-    writer.WriteItem(1, DateTime.Now - start, i);
-
+Data data = new Data {
+                TableID = 0,
+                Time = new TimeSpan(DateTime.Now.Ticks),
+                NameField = "hello, world!!!!!".ToCharArray(),
+                TypeField = 'I',
+                DataField = BitConverter.GetBytes(345678901)
+            }; 
+writer.WriteItem(data);
 writer.Flush();
-
-for (int i = 0; i < 6; ++i)
-    writer.WriteItem(0, DateTime.Now - start, i);
-
-for (int i = 0; i < 4; ++i)
-    writer.WriteItem(1, DateTime.Now - start, i);
 
 writer.Close();
 ```
@@ -65,7 +60,7 @@ var reader = new FastSeries.Reader("test.db");
     {
         var items = reader.TryRead(0, 10);
         foreach (var item in items)
-            Console.WriteLine("{0}    {1}", item.Item1, item.Item2);
+            Console.WriteLine("{0}    {1}", new DateTime(items[i].Item1.Ticks), items[i].Item2.ToString()););
     }
 }
 
